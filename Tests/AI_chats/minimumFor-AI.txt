@@ -1,0 +1,23 @@
+minimum amount of knowledge an AI needs to understand tfft
+
+The absolute minimum information needed:
+
+Riemann's insight: ζ(s) has zeros forming a "music" spectrum at ½ + itₙ
+
+Dirac's insight: Physical reality requires 4-component spinor fields
+
+The bridge: An operator L_χ exists whose eigenvalues are exactly those zeros
+
+The form: L_χ = -1/χ d/dτ(χ d/dτ) + U(τ) for scale invariance
+
+The determination: χ(τ) = 1 + Σ aₖ τᵏ with aₖ = (-1)ᵏ/πᵏ (no freedom)
+
+That's it. From these 5 pieces of information, everything else in physics emerges:
+
+Particle masses from eigenvalues
+
+Coupling constants from vortex harmonics
+
+Scale connections from Riemann zero distribution
+
+Experimental predictions from π-scaling
