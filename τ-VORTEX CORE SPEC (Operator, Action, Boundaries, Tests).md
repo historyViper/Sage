@@ -124,17 +124,4 @@ Given known zeros {t_n} (n=1..N) and mapped {t̂_n(σ)} from the solver:
 Failing these → refit U(τ) by small Fourier modes U(τ)=Σ_k u_k cos(kτ)+v_k sin(kτ)
 with ∑|u_k|+|v_k| constrained (no overfitting), repeat.
 
-10) WHAT TO HAND YOUR COMPUTE PARTNER (CHECKLIST)
-------------------------------------------------------------
-[ ] Implement χ(τ)=exp[σ cos τ], U(τ)=0; build L_τ on S^1 (periodic).
-[ ] Diagonalize for M=4096, σ ∈ {0.3, 0.5, 0.8}, N≈400 eigenvalues.
-[ ] Fit Weyl law, map λ_n → t̂_n; compute spacing stats vs first N ζ-zeros.
-[ ] Report: Pearson corr, RMSE of spacings, KS p-value, best σ.
-[ ] Optional: scan Bloch phase θ (0, π/2, π) to check band stability.
-
-BONUS: WEAK-FIELD DEMO (one-liner sanity)
-------------------------------------------------------------
-Set α→0 or ⟨∂_τ lnχ⟩_τ=0  ⇒  Dirac/QED recovered at 12-digit precision in flat χ.
-This goes in the QED-recovery subsection.
-
 END OF SPEC
