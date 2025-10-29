@@ -258,5 +258,4 @@ def main():
 
 import sys
 sys.argv = ['', '--K', '50', '--train', '25', '--M', '500', '--L-steps', '5', '--L-min', '20', '--L-max', '24', '--theta-steps', '10', '--theta-min', '1', '--theta-max', '2', '--seed', '1337']
-main()</parameter
-</xai:function_call
+main()
