@@ -1,0 +1,16 @@
+Metric,Value
+Training MAPE (%),5.2281683749
+Validation MAPE (%),1.3669124880
+Extended MAPE (%),4.6371723374
+Training MAE,1.9138936247
+Validation MAE,1.8872672728
+Extended MAE,8.1535914915
+Training Max Error,8.2153977307
+Validation Max Error,5.1320748050
+Extended Max Error,11.1513354674
+Affine Coefficient a,958.8290753517
+Affine Coefficient b,-191.0926949013
+Eigenvalue Range Min,0.2226077862
+Eigenvalue Range Max,0.4061964358
+Eigenvalue Mean,0.3185323675
+Eigenvalue Std Dev,0.0525418113
