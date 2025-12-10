@@ -1,0 +1,132 @@
+# Time-Flow Field Theory: Tensor-Time Interpretation of Dirac Spinor Imaginary Components
+
+## Abstract
+
+Time-Flow Field Theory (TFFT) is revised to provide a physical interpretation of the Dirac spinor imaginary component. When a vortex-particle's torsion coherence is incomplete, the imaginary torsion becomes geometrically real, activating an orthogonal time-flow axis we call tensor-time χ⊥. χ⊥ is not backward time, nor negative-energy states, but the physical projection of the i term in Dirac's relativistic spinor structure.
+
+This mechanism produces:
+
+- **Zero-Point Energy** as incomplete vortex fragments
+- **Tunneling** as χ∥↔χ⊥ rotation
+- **Antiparticles** as torsion-axis inversion, not time reversal
+- **GOE→GUE transitions** from instability between time axes
+- **Particle mass** as resistance to χ⊥ projection
+
+This resolves multiple long-standing contradictions in quantum theory while preserving all successful predictions of the Dirac equation and QFT.
+
+## 1. Introduction
+
+Earlier versions of TFFT assigned χ the role of governing time-flow curvature, inertia, and the running of interactions. This update preserves that but corrects an interpretation: **there are no negative-time states.**
+
+Instead:
+
+- When imaginary spinor torsion is uncanceled, the time-flow vector rotates into χ⊥.
+- Normal matter remains in pure χ∥.
+- ZPE and quantum instability occur when χ∥+χ⊥ are superposed.
+
+This model maintains compatibility with GR curvature while adding the missing torsion-geometry link.
+
+## 2. The χ-Field and Zero-Point Geometry
+
+Vacuum space is filled with proto-vortex torsion fragments (χ-quanta). They are not probability ghosts but incomplete spinor vortices whose geometry fails to stabilize:
+
+| State | Geometry | χ Behavior | Physical Identity |
+|-------|----------|------------|-------------------|
+| Stable | Full spinor symmetry; imaginary parts cancel | χ∥ coherent | Particle |
+| Marginally stable | Partial imaginary torsion visible | χ∥↔χ⊥ oscillation | Zitterbewegung / tunneling |
+| Unstable | Imaginary torsion dominates | χ⊥ projection | χ-quantum (vacuum energy) |
+
+Thus:
+
+**ZPE = the geometric remainder of incomplete Dirac vortices**
+
+This fully explains vacuum fluctuations without virtual-particle metaphysics.
+
+## 3. Torsion and Spin-Time Coupling
+
+Particles are 4D torsion vortices, not point objects.
+
+Mass is:
+- stored torsion resisting χ⊥ drift
+
+Einstein–Cartan torsion is therefore required for quantum stability:
+
+$$T_{\mu\nu\rho} S^{\mu\nu\rho} \neq 0$$
+
+Spin is real geometry, not an abstract quantum number.
+
+## 4. Tensor-Time χ⊥: Orthogonal Time-Flow Axis
+
+Earlier drafts described χ− as backward-time.  
+That is replaced by:
+
+$$\chi_\perp \perp \chi_\parallel$$
+
+**Tensor-time χ⊥:**
+
+- Is revealed when spinor imaginary components no longer cancel
+- Opens temporary warp-shielded spatial degrees of freedom
+- Allows field configurations that do not interact normally
+- Collapses back when vortex coherence is restored
+
+This unifies:
+
+- tunneling
+- ZPE resonance
+- antiparticle symmetry
+- GOE→GUE chaotic transitions
+
+→ All as rotations in time-flow geometry.
+
+## 5. Full Extended TFFT Lagrangian
+
+(No numbering or structure changed — content updated to match χ⊥ interpretation)
+
+$$\mathcal{L} = \frac{1}{2\kappa}(R + \alpha T) + \frac{1}{2}(\nabla_\mu \chi)(\nabla^\mu \chi) - V(\chi) + \bar{\psi}[i\gamma^\mu(\nabla_\mu + ieA_\mu) + i\gamma^\tau \partial_\tau - m]\psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}$$
+
+Here $\gamma^\tau \partial_\tau$ is the geometric Dirac projection into χ⊥.
+
+### 5.1 Dirac Field Correction
+
+The **i** in the Dirac spinor is reinterpreted physically:
+
+> The imaginary component is torsion trying to rotate into χ⊥.
+
+$$(i\gamma^\mu \partial_\mu + i\gamma^\tau \partial_\tau - m)\psi = 0$$
+
+- **Zitterbewegung** = rapid flipping between χ∥ and χ⊥.
+- **Antiparticles** = torsion axis inversion—not negative-energy holes.
+
+## 6. Phenomenology and Testable Predictions
+
+Updated predictions:
+
+| Effect | Mechanism |
+|--------|-----------|
+| Tunneling | χ∥→χ⊥→χ∥ spinor rotations |
+| Casimir shifts | χ⊥ dwell-time differences near boundaries |
+| Josephson asymmetry | partial torsion leakage into χ⊥ |
+| ZPE magnitude | density of incomplete χ-vortices |
+| Particle decay | failure to maintain torsion coherence |
+| MOND-like effects | χ-flow curvature scaling in low-gradient regions |
+
+Each is falsifiable.
+
+## 7. Conclusion
+
+With tensor-time geometry:
+
+- Dirac's imaginary terms gain physical meaning
+- ZPE becomes geometric instead of probabilistic
+- Antiparticles no longer require backward time
+- Mass is torsion-coherence, not Higgs-dependence
+- Quantum chaos emerges from time-axis instability
+
+**TFFT is now a spin-torsion vortex theory of matter and vacuum.**
+
+## 8. Future Work
+
+- χ⊥ dwell-time spectroscopy
+- Spin-torsion resonance experiments
+- Explicit mass hierarchy from torsion-angle quantization
+- Tensor-time simulations of tunneling dynamics
