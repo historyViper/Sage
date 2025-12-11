@@ -1,0 +1,298 @@
+# KbLS: Kilobyte Laser System — A Multi-DoF Photonic Compute Architecture
+
+> Working title: **Kibbles & Bits**  
+> A single-laser, multi-degree-of-freedom photonic compute core for GPU-like workloads.
+
+---
+
+## Abstract
+
+This document proposes **KbLS (Kilobyte Laser System)**, a conceptual photonic compute architecture that uses a **single coherent laser** to perform **multi-bit, multi-channel computation** by exploiting the full state space of the optical field.
+
+Instead of treating a laser as a one-dimensional amplitude carrier (one laser = one bitstream), KbLS models the beam as a **high-dimensional state vector** spanning:
+
+- frequency (wavelength) modes  
+- polarization states  
+- spatial / orbital angular momentum (OAM) modes  
+- temporal / oscillation-stage information  
+
+Computation is implemented by routing this multi-degree-of-freedom (multi-DoF) state through a **programmable photonic core** composed of interferometers, resonators, and phase shifters. Logical bits and numeric values are extracted by sampling the **oscillation stage** and geometry of the wave, rather than simply thresholding intensity.
+
+The goal is a **photonic GPU core** which:
+- dramatically lowers energy per bit (many bits per laser)  
+- uses optical interference and phase evolution as its native math engine  
+- stays compatible with existing electronic systems via standard I/O and control interfaces.
+
+---
+
+## 1. Motivation
+
+Conventional photonic links and compute systems often assume:
+
+- one laser ≈ one channel  
+- one channel ≈ one bitstream  
+- bits are recovered by intensity thresholding at a detector.
+
+Under this model, lasers appear **energy-inefficient** when considered on a per-bit basis, especially compared to aggressively scaled CMOS.
+
+However, a coherent laser beam is not a one-dimensional object. Physically, the optical field carries information in:
+
+- amplitude  
+- phase  
+- polarization  
+- spatial structure  
+- mode index (e.g., OAM)  
+
+Treating all of this as a “single channel” wastes almost all of the available structure.
+
+KbLS starts from a different premise:
+
+> A single coherent laser beam is a **multi-dimensional state**, and bits should be defined in terms of its **oscillation stage and geometry**, not just its raw intensity.
+
+---
+
+## 2. Beam as a High-Dimensional State Vector
+
+We model the laser output as a coherent field:
+
+\[
+E(t) = A_0 e^{i(\omega_0 t + \phi_0)} \, \mathbf{v}_0
+\]
+
+where:
+
+- \(A_0\) is the baseline amplitude  
+- \(\omega_0\) is the carrier angular frequency  
+- \(\phi_0\) is the initial phase  
+- \(\mathbf{v}_0\) encodes polarization and spatial structure.
+
+After KbLS’s **multi-DoF encoder**, the beam becomes:
+
+\[
+\Psi_\text{in} = \{ A_m e^{i \phi_m} \}_{m=1}^{M}
+\]
+
+Each index \(m\) corresponds to a particular combination of:
+
+- wavelength / frequency  
+- polarization state  
+- spatial / OAM mode  
+- time slot or oscillation stage  
+
+The total optical energy is:
+
+\[
+U = \sum_{m=1}^{M} |A_m|^2
+\]
+
+If we encode \(k\) logical bits into these \(M\) complex amplitudes and phases, the **energy per bit** becomes:
+
+\[
+E_\text{bit} = \frac{U}{k}
+\]
+
+Traditional systems implicitly assume \(k \approx 1\) for each laser.  
+KbLS aims for \(k \gg 1\) by exploiting multi-DoF encoding.
+
+---
+
+## 3. Information as Oscillation Stage
+
+In intensity-based systems, bits are recovered via simple thresholding:
+
+\[
+\text{bit} =
+\begin{cases}
+1, & I > T \\
+0, & I \le T
+\end{cases}
+\]
+
+KbLS instead treats **oscillation stage** and **phase** as core components of the encoding.  
+Define the instantaneous phase of a mode as:
+
+\[
+\theta_m(t) = \omega_m t + \phi_m
+\]
+
+and let:
+
+\[
+\theta_m^\ast = \theta_m(t) \bmod 2\pi
+\]
+
+We can map different phase regions to symbols:
+
+- 2 regions → 1 bit per sample  
+- 4 regions → 2 bits per sample  
+- 8 regions → 3 bits per sample, etc.
+
+More generally:
+
+\[
+b_k = f_k\big( \theta_m^\ast, A_m, \text{mode index } m \big)
+\]
+
+This means that **bits are recovered from where the wave is in its oscillation cycle**, and from which mode it occupies, rather than simply “how bright it is.”
+
+---
+
+## 4. KbLS Top-Level Architecture
+
+KbLS is organized into the following major blocks:
+
+1. **Power & Clock Subsystem**  
+2. **Master Laser & Stabilization**  
+3. **Multi-DoF Encoder (Input Front-End)**  
+4. **Optical Distribution & Mode Routing Network**  
+5. **Photonic Compute Core (Matrix / Convolution Engine)**  
+6. **State-Tap & Monitoring Layer (Non-Destructive Probes)**  
+7. **Demux & Readout (Bit / Vector Extraction)**  
+8. **Electronic Control, Memory & Host Interface**
+
+### 4.1 Power & Clock Subsystem
+
+- Provides stable electrical power.
+- Distributes a reference clock for:
+  - phase sampling windows,
+  - synchronization with external systems,
+  - timing of oscillation-stage measurements.
+
+### 4.2 Master Laser & Stabilization
+
+- Coherent laser diode / fiber laser.  
+- Temperature and frequency stabilization (e.g., TEC + reference cavity).  
+- Intensity stabilization via feedback.
+
+Generates the parent beam with controlled amplitude, frequency, and phase.
+
+### 4.3 Multi-DoF Encoder (Input Front-End)
+
+Transforms the single input beam into a **multi-channel state**:
+
+- **WDM modulation** to create multiple frequency channels.  
+- **Polarization modulation** to encode auxiliary bits or control flags.  
+- **High-speed phase modulation** to encode oscillation-stage-controlled information.  
+- **Spatial / OAM modulation** to place logical channels into distinct spatial / vortex modes.
+
+The output of this block is the high-dimensional state vector \(\Psi_\text{in}\).
+
+### 4.4 Optical Distribution & Mode Routing Network
+
+- Waveguide splitters / combiners.  
+- Directional couplers and mode sorters.  
+- Polarization beam splitters / rotators.
+
+This network routes specific subsets of modes to different regions of the compute core, similar to how an electronic crossbar routes data to different functional units.
+
+### 4.5 Photonic Compute Core
+
+The core implements linear transformations on \(\Psi\) using:
+
+- **MZI (Mach–Zehnder interferometer) meshes** for arbitrary unitary / linear transforms.  
+- **Resonators and delay lines** to exploit controlled phase evolution and temporal behavior.  
+- Optional nonlinear elements for activation-like functions.
+
+Mathematically, the core applies a matrix \(\mathbf{U}\) to the state:
+
+\[
+\Psi_\text{out} = \mathbf{U} \, \Psi_\text{in}
+\]
+
+By programming the phase shifters and couplers inside the mesh, KbLS can implement dense matrices, convolutions, and other GPU-like operations.
+
+### 4.6 State-Tap & Monitoring Layer
+
+- Weak couplers extract a small fraction of power from selected modes.  
+- Reference interferometers compare tapped signals to a stable reference.  
+- Feedback loops correct slow drifts in:
+  - master laser phase,  
+  - MZI bias points,  
+  - resonator detuning.
+
+These non-destructive taps let KbLS:
+
+- maintain calibration,  
+- verify oscillation-stage mapping,  
+- optionally enable feedback-based algorithms.
+
+### 4.7 Demux & Readout
+
+At the far end of the compute core:
+
+- Mode demultiplexers separate:
+  - OAM / spatial modes,  
+  - wavelengths,  
+  - polarization channels.
+- Coherent receivers sample:
+  - amplitude,
+  - phase,
+  - polarization at specific time / phase windows.
+- Oscillation-stage samplers map phase regions to multi-bit symbols.
+- Photodiodes and ADCs convert optical states to digital vectors.
+
+The result is a set of numerical outputs (vectors, matrices, or feature maps) suitable for further electronic processing.
+
+### 4.8 Electronic Control, Memory & Host Interface
+
+An electronic controller:
+
+- Programs the phase shifters and resonators (effectively writing the matrices / kernels).  
+- Manages data injection and readout timing.  
+- Exposes a host interface (e.g., PCIe / CXL) so KbLS appears as a coprocessor or accelerator.
+
+---
+
+## 5. Relationship to Solar Cells and Photodiodes
+
+Solar panels and photodiodes already interact with oscillating EM fields, but they are optimized for **energy harvesting**, not information preservation.
+
+- A solar cell absorbs a portion of the incoming field, creating electron-hole pairs.  
+- Each absorption event reduces the local field amplitude and alters the field state.  
+- After enough interactions, coherence is effectively lost.
+
+In contrast, KbLS:
+
+- Avoids absorption inside the compute core.  
+- Uses mirrors, couplers, and interference to manipulate the wave **without collapsing it**.  
+- Only performs destructive measurement at the final readout stage, or in carefully controlled taps.
+
+Both systems “sample” the oscillation state of the wave, but with very different goals:
+
+- Solar cells → maximize energy conversion.  
+- KbLS → preserve and transform coherent structure to perform computation.
+
+---
+
+## 6. Advantages and Potential Directions
+
+### 6.1 Advantages
+
+- **Energy per bit reduction**: one laser, many logical channels.  
+- **Intrinsic parallelism**: frequency, polarization, spatial modes, and oscillation stages all carry concurrent data.  
+- **Native linear algebra**: MZI meshes are naturally suited for matrix multiplication and convolution.  
+- **Integration with existing hardware**: standard electrical control and host interfaces.
+
+### 6.2 Potential Applications
+
+- Neural network acceleration (optical matrix-multiply).  
+- Signal processing with ultra-high bandwidth.  
+- Physics simulations exploiting wave-based computation.  
+- Research testbed for oscillation-stage and geometric encoding schemes.
+
+---
+
+## 7. Status and Future Work
+
+KbLS is currently a conceptual architecture and math framework. Future work includes:
+
+- More detailed modeling of noise, loss, and non-idealities.  
+- Concrete encoding schemes for specific workloads (e.g., CNN layers, FFTs).  
+- Hardware-friendly layouts and component choices.  
+- Comparison against electronic GPUs in energy, latency, and compute density.
+
+---
+
+## 8. License
+
+(Add your chosen license here, e.g. MIT, Apache-2.0, etc.)
